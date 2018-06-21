@@ -8,13 +8,13 @@ After [downloading the datasets](../datasets/README.md), you need to make them i
 The CSV file should look like the following:
 
 ```text
-PathToImage,Top,Left,Bottom,Right,ClassName
+path_to_image,top,left,bottom,right,class_name
 mensural/0123.png,100,120,130,142,notehead
 mensural/0123.png,12,52,20,72,stem
 mensural/0124.png,2,42,100,102,stem
 ```
 
-an empty file is represented with a single line without an object:
+an empty file (a file that contains no objects) is represented with a single line without an object:
 
 ```text
 path/to/empty_image.png,,,,,
@@ -23,7 +23,7 @@ path/to/empty_image.png,,,,,
 and for detection results, the very same format is used with one additional column:
 
 ```text
-PathToImage,Top,Left,Bottom,Right,ClassName,Confidence
+path_to_image,top,left,bottom,right,class_name,confidence
 mensural/0123.png,100,120,130,142,notehead,0.9752
 mensural/0123.png,12,52,20,72,stem,0.5623
 mensural/0124.png,2,42,100,102,stem,0.9882

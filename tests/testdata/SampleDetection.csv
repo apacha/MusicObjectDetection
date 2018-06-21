@@ -1,0 +1,5 @@
+path_to_image,top,left,bottom,right,class_name
+mensural/0123.png,99,120,132,144,notehead
+mensural/0123.png,15,58,22,70,barline
+mensural/0123.png,12,14,15,19,dot
+mensural/0124.png,4,42,100,101,stem

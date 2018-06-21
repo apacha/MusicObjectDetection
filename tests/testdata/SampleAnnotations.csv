@@ -1,0 +1,4 @@
+path_to_image,top,left,bottom,right,class_name
+mensural/0123.png,100,120,130,142,notehead
+mensural/0123.png,12,52,20,72,stem
+mensural/0124.png,2,42,100,102,stem
