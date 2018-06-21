@@ -3,6 +3,7 @@ Pillow >= 4.1.1
 pytest >= 3.0.7
 
 # Install via "pip install ..."
+lxml
 omrdatasettools
 codecov
 pytest-cov
