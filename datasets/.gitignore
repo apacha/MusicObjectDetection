@@ -1,6 +1,5 @@
 /cvc_muscima/
 /mensural/
 /muscima_pp/
-/CVCMUSCIMA_SR.zip
-/MUSCIMA-pp_v1.0.zip
-/mensural-detector-database.zip
+/deepscores/
+*.zip
