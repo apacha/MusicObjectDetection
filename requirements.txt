@@ -1,0 +1,2 @@
+# Install via "pip install ..."
+omrdatasettools
