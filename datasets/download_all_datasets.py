@@ -4,7 +4,7 @@ import os
 from omrdatasettools.downloaders.CvcMuscimaDatasetDownloader import CvcMuscimaDatasetDownloader, CvcMuscimaDataset
 from omrdatasettools.downloaders.MuscimaPlusPlusDatasetDownloader import MuscimaPlusPlusDatasetDownloader
 
-from datasets.CapitanDatasetDownloader import MensuralDatasetDownloader
+from datasets.MensuralDatasetDownloader import MensuralDatasetDownloader
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
