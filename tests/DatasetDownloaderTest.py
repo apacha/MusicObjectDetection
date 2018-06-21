@@ -7,6 +7,7 @@ from typing import List
 from hamcrest import assert_that, is_, equal_to
 from omrdatasettools.downloaders import DatasetDownloader
 
+from datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
 from datasets.MensuralDatasetDownloader import MensuralDatasetDownloader
 
 
@@ -22,6 +23,19 @@ class DatasetDownloaderTest(unittest.TestCase):
         self.download_dataset_and_verify_correct_extraction(destination_directory, number_of_samples_in_the_dataset,
                                                             target_file_extension, zip_file,
                                                             downloader)
+
+    def test_download_and_extract_deepscores_dataset_expect_folder_to_be_created(self):
+        # Arrange
+        destination_directory = "deepscores"
+        downloader = DeepScoresDatasetDownloader(destination_directory)
+        zip_file = downloader.get_dataset_filename()
+        number_of_samples_in_the_dataset = 400
+        target_file_extension = ["*.png", "*.xml"]
+
+        self.download_dataset_and_verify_correct_extraction(destination_directory, number_of_samples_in_the_dataset,
+                                                            target_file_extension, zip_file,
+                                                            downloader)
+
 
     def download_dataset_and_verify_correct_extraction(self, destination_directory: str,
                                                        number_of_samples_in_the_dataset: int,

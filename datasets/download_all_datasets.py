@@ -4,6 +4,7 @@ import os
 from omrdatasettools.downloaders.CvcMuscimaDatasetDownloader import CvcMuscimaDatasetDownloader, CvcMuscimaDataset
 from omrdatasettools.downloaders.MuscimaPlusPlusDatasetDownloader import MuscimaPlusPlusDatasetDownloader
 
+from datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
 from datasets.MensuralDatasetDownloader import MensuralDatasetDownloader
 
 if __name__ == "__main__":
@@ -28,3 +29,6 @@ if __name__ == "__main__":
     downloader = MensuralDatasetDownloader(mensural_directory)
     downloader.download_and_extract_dataset()
 
+    deepscores_directory = os.path.join(flags.dataset_directory, "deepscores")
+    downloader = DeepScoresDatasetDownloader(deepscores_directory)
+    downloader.download_and_extract_dataset()
