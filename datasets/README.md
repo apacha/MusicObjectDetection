@@ -7,3 +7,5 @@ In this repository we link to [relevant datasets](https://apacha.github.io/OMR-D
 - [Capitan Collection](https://bitbucket.org/apacha/mensural-detector-database/src/master/)
 
 To download all datasets, simply run `python download_all_datasets.py`
+
+Before using these datasets, we recommend that you [normalize the datasets](../preprocessing/README.md).

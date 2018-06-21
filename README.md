@@ -2,6 +2,12 @@
 
 This is the accompanying repository for the Music Object Detection paper and contains the source code for downloading, preprocessing and working with the data, as well as the evaluation code to measure the performance of various music object detectors.
 
+See the following READMEs for more details on:
+
+- [Downloading the datasets](datasets/README.md)
+- [Normalizing the datasets](preprocessing/README.md)
+- [Evaluating performance of detectors](evaluation/README.md)
+
 # License
 
 Published under MIT License,
