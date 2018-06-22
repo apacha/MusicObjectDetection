@@ -4,7 +4,6 @@ import unittest
 from glob import glob
 from typing import List
 
-import pytest
 from hamcrest import assert_that, is_, equal_to
 from omrdatasettools.downloaders import DatasetDownloader
 
