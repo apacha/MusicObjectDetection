@@ -1,14 +1,18 @@
+import os
+import shutil
 import unittest
 
 import pandas as pd
+from hamcrest import assert_that, is_, empty, not_, equal_to
 from pandas.util.testing import assert_frame_equal
 
-from preprocessing.DeepScoreXmlToCsvConverter import DeepScoresXmlToCsvConverter
+from datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
+from preprocessing.DeepScoreXmlToCsvConverter import DeepScoreXmlToCsvConverter
 
 
 class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
 
-    def test_download_and_extract_deepscores_dataset_expect_folder_to_be_created(self):
+    def test_deep_scores_xml_to_csv_conversion(self):
         # Arrange
         sample_annotation_file = \
             """<annotation>
@@ -40,18 +44,48 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
                    </object>
                </annotation>"""
 
-        expected_data = [(
-                         "lg-2236887-aug-beethoven--page-2.svg", "0.04028364", "0.66760346", "0.04686767", "0.67829842",
-                         "noteheadBlack"),
-                         (
-                         "lg-2236887-aug-beethoven--page-2.svg", "0.08813473", "0.66760346", "0.09471876", "0.67829842",
-                         "noteheadBlack")]
+        expected_data = [
+            ("lg-2236887-aug-beethoven--page-2.svg", "0.04028364", "0.66760346", "0.04686767", "0.67829842",
+             "noteheadBlack"),
+            ("lg-2236887-aug-beethoven--page-2.svg", "0.08813473", "0.66760346", "0.09471876", "0.67829842",
+             "noteheadBlack")]
         expected_output = pd.DataFrame(data=expected_data,
                                        columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
 
-        converter = DeepScoresXmlToCsvConverter()
-        csv_output = converter.convertXmlAnnotationsToCsv(sample_annotation_file)
+        converter = DeepScoreXmlToCsvConverter()
+        csv_output, _, _ = converter.convert_xml_annotations_to_csv(sample_annotation_file)
         assert_frame_equal(csv_output, expected_output)
+
+    def test_convert_relative_to_absolute_coordinates(self):
+        data_input = pd.DataFrame(data=[("page-2.svg", "0.01", "0.02", "0.03", "0.04", "noteheadBlack")],
+                                  columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
+        expected_output = pd.DataFrame(data=[("page-2.svg", 1.0, 4.0, 3.0, 8.0, "noteheadBlack")],
+                                       columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
+
+        converter = DeepScoreXmlToCsvConverter()
+        actual_output = converter.convert_relative_to_absolute_coordinates(data_input, 200, 100)
+
+        assert_frame_equal(actual_output, expected_output)
+
+    def test_deep_scores_normalization_expect_annotations_in_directory(self):
+        # Arrange
+        dataset_directory = "temp"
+        normalized_dataset_directory = "temp/normalized_deep_scores"
+        downloader = DeepScoresDatasetDownloader()
+        downloader.download_and_extract_dataset(dataset_directory)
+        converter = DeepScoreXmlToCsvConverter()
+
+        # Act
+        converter.convert_and_normalize_deep_scores_dataset(os.path.join(dataset_directory, "deep-scores-200"),
+                                                            normalized_dataset_directory)
+
+        # Assert
+        assert_that(os.path.exists(normalized_dataset_directory), is_(equal_to(True)))
+        assert_that(os.listdir(normalized_dataset_directory), is_(not_(empty())))
+
+        # Cleanup
+        shutil.rmtree("temp", True)
+        os.remove("deep-scores-200.zip")
 
 
 if __name__ == '__main__':

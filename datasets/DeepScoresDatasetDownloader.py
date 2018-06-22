@@ -33,7 +33,7 @@ if __name__ == "__main__":
         default="../data/deepscores",
         help="The directory, where the extracted dataset will be copied to")
 
-    flags, unparsed = parser.parse_known_args()
+    flags, _ = parser.parse_known_args()
 
     dataset = DeepScoresDatasetDownloader()
     dataset.download_and_extract_dataset(flags.dataset_directory)

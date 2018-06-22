@@ -1,11 +1,7 @@
 import argparse
 import os
 
-from omrdatasettools.downloaders.CvcMuscimaDatasetDownloader import CvcMuscimaDatasetDownloader, CvcMuscimaDataset
-from omrdatasettools.downloaders.MuscimaPlusPlusDatasetDownloader import MuscimaPlusPlusDatasetDownloader
-
-from datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
-from datasets.MensuralDatasetDownloader import MensuralDatasetDownloader
+from preprocessing.DeepScoreXmlToCsvConverter import DeepScoreXmlToCsvConverter
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -17,3 +13,8 @@ if __name__ == "__main__":
 
     flags, unparsed = parser.parse_known_args()
 
+    deep_score_converter = DeepScoreXmlToCsvConverter()
+    deep_score_directory = os.path.join(flags.dataset_directory, "deepscores", "deep-scores-200")
+    normalized_deep_score_directory = os.path.join(flags.dataset_directory, "normalized", "deepscores")
+    deep_score_converter.convert_and_normalize_deep_scores_dataset(deep_score_directory,
+                                                                   normalized_deep_score_directory)
