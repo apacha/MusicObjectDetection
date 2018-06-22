@@ -92,3 +92,4 @@ ENV/
 .idea/
 
 /output_inference_graph/
+/data/
