@@ -9,26 +9,19 @@ class MensuralDatasetDownloader(DatasetDownloader):
         https://bitbucket.org/apacha/mensural-detector-database/
     """
 
-    def __init__(self, destination_directory: str):
-        """
-        Create and initializes a new dataset.
-        :param destination_directory: The root directory, into which the data will be copied.
-        """
-        super().__init__(destination_directory)
-
     def get_dataset_download_url(self) -> str:
         return "https://owncloud.tuwien.ac.at/index.php/s/hMc6WY64rYO9jcX/download"
 
     def get_dataset_filename(self) -> str:
         return "mensural-detector-database.zip"
 
-    def download_and_extract_dataset(self):
+    def download_and_extract_dataset(self, destination_directory: str):
         if not os.path.exists(self.get_dataset_filename()):
             print("Downloading Mensural Dataset...")
             self.download_file(self.get_dataset_download_url(), self.get_dataset_filename())
 
         print("Extracting Mensural Dataset...")
-        self.extract_dataset(self.destination_directory)
+        self.extract_dataset(os.path.abspath(destination_directory))
 
 
 if __name__ == "__main__":
@@ -41,5 +34,5 @@ if __name__ == "__main__":
 
     flags, unparsed = parser.parse_known_args()
 
-    dataset = MensuralDatasetDownloader(flags.dataset_directory)
-    dataset.download_and_extract_dataset()
+    dataset = MensuralDatasetDownloader()
+    dataset.download_and_extract_dataset(flags.dataset_directory)

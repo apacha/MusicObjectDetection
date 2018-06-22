@@ -4,7 +4,7 @@ pytest >= 3.0.7
 
 # Install via "pip install ..."
 lxml
-omrdatasettools
+omrdatasettools >= 0.10
 codecov
 pytest-cov
 PyHamcrest
