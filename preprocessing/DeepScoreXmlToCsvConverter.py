@@ -41,14 +41,14 @@ class DeepScoreXmlToCsvConverter(object):
 
         return normalized_annotations
 
-    def convert_and_normalize_deep_scores_dataset(self, path_to_deep_scores: str, output_path: str) -> None:
+    def convert_and_normalize_deep_scores_dataset(self, path_to_deep_scores: str, output_directory: str) -> None:
 
-        os.makedirs(os.path.join(output_path, "images"), exist_ok=True)
+        os.makedirs(os.path.join(output_directory, "images"), exist_ok=True)
 
         source_image_directory = os.path.join(path_to_deep_scores, "images_png")
         source_annotation_directory = os.path.join(path_to_deep_scores, "xml_annotations")
-        destination_image_directory = os.path.join(output_path, "images")
-        destination_annotation_file = os.path.join(output_path, "deep_score_annotations.csv")
+        destination_image_directory = os.path.join(output_directory, "images")
+        destination_annotation_file = os.path.join(output_directory, "annotations.csv")
 
         for image_file_name in tqdm(os.listdir(source_image_directory), desc="Copying images"):
             source_path = os.path.join(source_image_directory, image_file_name)
