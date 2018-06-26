@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 
 class DeepScoreXmlToCsvConverter(object):
-    def convert_xml_annotations_to_csv(self, annotation_xml_string: str) -> Tuple[pd.DataFrame, int, int]:
+    def _convert_xml_annotations_to_csv(self, annotation_xml_string: str) -> Tuple[pd.DataFrame, int, int]:
 
         root = etree.fromstring(annotation_xml_string)
         filename = root.findtext("filename")
@@ -29,8 +29,8 @@ class DeepScoreXmlToCsvConverter(object):
 
         return converted_output, image_width, image_height
 
-    def convert_relative_to_absolute_coordinates(self, annotations: pd.DataFrame, image_width: int,
-                                                 image_height: int) -> pd.DataFrame:
+    def _convert_relative_to_absolute_coordinates(self, annotations: pd.DataFrame, image_width: int,
+                                                  image_height: int) -> pd.DataFrame:
 
         normalized_annotations = annotations.copy(True)  # type: pd.DataFrame
         normalized_annotations = normalized_annotations.apply(pd.to_numeric, errors='ignore')
@@ -41,27 +41,29 @@ class DeepScoreXmlToCsvConverter(object):
 
         return normalized_annotations
 
-    def convert_and_normalize_deep_scores_dataset(self, path_to_deep_scores: str, output_directory: str) -> None:
+    def copy_and_normalize_images(self, deep_scores_directory: str, output_directory: str) -> None:
 
         os.makedirs(os.path.join(output_directory, "images"), exist_ok=True)
 
-        source_image_directory = os.path.join(path_to_deep_scores, "images_png")
-        source_annotation_directory = os.path.join(path_to_deep_scores, "xml_annotations")
+        source_image_directory = os.path.join(deep_scores_directory, "images_png")
         destination_image_directory = os.path.join(output_directory, "images")
-        destination_annotation_file = os.path.join(output_directory, "annotations.csv")
 
         for image_file_name in tqdm(os.listdir(source_image_directory), desc="Copying images"):
             source_path = os.path.join(source_image_directory, image_file_name)
             destination_path = os.path.join(destination_image_directory, image_file_name)
             shutil.copy(source_path, destination_path)
 
+    def normalize_annotations(self, deep_scores_directory: str, output_directory: str) -> None:
+        source_annotation_directory = os.path.join(deep_scores_directory, "xml_annotations")
+        destination_annotation_file = os.path.join(output_directory, "annotations.csv")
+
         all_annotations = None
         for annotation_file_name in tqdm(os.listdir(source_annotation_directory), desc="Converting annotations"):
             with open(os.path.join(source_annotation_directory, annotation_file_name), "r") as annotation_file:
                 file_content = annotation_file.read()
-                annotations, image_width, image_height = self.convert_xml_annotations_to_csv(file_content)
-                absolute_annotations = self.convert_relative_to_absolute_coordinates(annotations, image_width,
-                                                                                     image_height)
+                annotations, image_width, image_height = self._convert_xml_annotations_to_csv(file_content)
+                absolute_annotations = self._convert_relative_to_absolute_coordinates(annotations, image_width,
+                                                                                      image_height)
                 absolute_annotations['path_to_image'] = absolute_annotations['path_to_image'].apply(
                     lambda x: "images/" + x)
                 if all_annotations is None:

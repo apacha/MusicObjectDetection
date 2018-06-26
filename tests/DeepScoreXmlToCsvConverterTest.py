@@ -53,7 +53,7 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
                                        columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
 
         converter = DeepScoreXmlToCsvConverter()
-        csv_output, _, _ = converter.convert_xml_annotations_to_csv(sample_annotation_file)
+        csv_output, _, _ = converter._convert_xml_annotations_to_csv(sample_annotation_file)
         assert_frame_equal(csv_output, expected_output)
 
     def test_convert_relative_to_absolute_coordinates(self):
@@ -63,7 +63,7 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
                                        columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
 
         converter = DeepScoreXmlToCsvConverter()
-        actual_output = converter.convert_relative_to_absolute_coordinates(data_input, 200, 100)
+        actual_output = converter._convert_relative_to_absolute_coordinates(data_input, 200, 100)
 
         assert_frame_equal(actual_output, expected_output)
 
@@ -76,8 +76,10 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
         converter = DeepScoreXmlToCsvConverter()
 
         # Act
-        converter.convert_and_normalize_deep_scores_dataset(os.path.join(dataset_directory, "deep-scores-200"),
-                                                            normalized_dataset_directory)
+        converter.copy_and_normalize_images(os.path.join(dataset_directory, "deep-scores-dense"),
+                                            normalized_dataset_directory)
+        converter.normalize_annotations(os.path.join(dataset_directory, "deep-scores-dense"),
+                                        normalized_dataset_directory)
 
         # Assert
         assert_that(os.path.exists(normalized_dataset_directory), is_(equal_to(True)))
@@ -85,7 +87,7 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
 
         # Cleanup
         shutil.rmtree("temp", True)
-        os.remove("deep-scores-200.zip")
+        os.remove("deep-scores-dense.zip")
 
 
 if __name__ == '__main__':
