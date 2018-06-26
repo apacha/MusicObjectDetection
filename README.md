@@ -10,7 +10,7 @@ In this repository we link to [relevant datasets](https://apacha.github.io/OMR-D
    - [MUSCIMA++](https://ufal.mff.cuni.cz/muscima)
    - [Capitan Collection](https://bitbucket.org/apacha/mensural-detector-database/src/master/)
    
-   To download all datasets, simply run `python download_all_datasets.py`
+   To download all datasets, simply run `python datasets/download_all_datasets.py --dataset_directory ./data`
    
 ## Dataset normalization
 After downloading the datasets, you need to make them interoperable with each other. 
