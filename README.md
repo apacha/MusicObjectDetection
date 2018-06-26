@@ -10,13 +10,16 @@ In this repository we link to [relevant datasets](https://apacha.github.io/OMR-D
    - [MUSCIMA++](https://ufal.mff.cuni.cz/muscima)
    - [Capitan Collection](https://bitbucket.org/apacha/mensural-detector-database/src/master/)
    
-   To download all datasets, simply run `python datasets/download_all_datasets.py --dataset_directory ./data`
+   To download all datasets, simply run 
+   
+`python datasets/download_all_datasets.py --dataset_directory ./data`
    
 ## Dataset normalization
-After downloading the datasets, you need to make them interoperable with each other. 
+After downloading the datasets, you need to make them interoperable with each other. To do this, call
 
-To do this, call `python normalize_all_datasets.py`.
+`python preprocessing/normalize_all_datasets.py --dataset_directory ./data`
 
+### Annotation format 
 We set up the following guidelines and procedures to normalize the datasets, before converting them into specific input formats, needed for various detectors:
 
 - Images are stored as color PNG files with white background and black foreground.
@@ -46,6 +49,7 @@ mensural/0123.png,12,52,20,72,stem,0.5623
 mensural/0124.png,2,42,100,102,stem,0.9882
 ```
 
+We opted for this simple format, because it can easily be read by humans and by the machine and different object detectors require specific formats anyway, e.g. PASCAL VOC format. By having all datasets normalized into a standard format, one only needs to write one target adapter for each destination format.
 
 ## Evaluation
 
