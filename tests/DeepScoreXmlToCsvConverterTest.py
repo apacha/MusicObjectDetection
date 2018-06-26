@@ -87,7 +87,7 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
 
         # Cleanup
         shutil.rmtree("temp", True)
-        os.remove("deep-scores-dense.zip")
+        os.remove("deep-scores-dense-mob.zip")
 
 
 if __name__ == '__main__':
