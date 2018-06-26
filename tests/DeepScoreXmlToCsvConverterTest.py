@@ -76,9 +76,9 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
         converter = DeepScoreXmlToCsvConverter()
 
         # Act
-        converter.copy_and_normalize_images(os.path.join(dataset_directory, "deep-scores-dense"),
+        converter.copy_and_normalize_images(os.path.join(dataset_directory, "deep_scores_dense"),
                                             normalized_dataset_directory)
-        converter.normalize_annotations(os.path.join(dataset_directory, "deep-scores-dense"),
+        converter.normalize_annotations(os.path.join(dataset_directory, "deep_scores_dense"),
                                         normalized_dataset_directory)
 
         # Assert

@@ -29,7 +29,7 @@ class DatasetDownloaderTest(unittest.TestCase):
         destination_directory = "deepscores"
         downloader = DeepScoresDatasetDownloader()
         zip_file = downloader.get_dataset_filename()
-        number_of_samples_in_the_dataset = 400
+        number_of_samples_in_the_dataset = 3728
         target_file_extension = ["*.png", "*.xml"]
 
         self.download_dataset_and_verify_correct_extraction(destination_directory, number_of_samples_in_the_dataset,
@@ -37,7 +37,7 @@ class DatasetDownloaderTest(unittest.TestCase):
                                                             downloader)
 
     def download_dataset_and_verify_correct_extraction(self, destination_directory: str,
-                                                       number_of_samples_in_the_dataset: int,
+                                                       expected_number_of_samples_in_the_dataset: int,
                                                        target_file_extensions: List[str], zip_file: str,
                                                        dataset_downloader: DatasetDownloader):
         # Arrange and Cleanup
@@ -55,7 +55,7 @@ class DatasetDownloaderTest(unittest.TestCase):
                               glob(os.path.join(x[0], target_file_extension))])
         actual_number_of_files = len(all_files)
 
-        assert_that(number_of_samples_in_the_dataset, is_(equal_to(actual_number_of_files)))
+        assert_that(actual_number_of_files, is_(equal_to(expected_number_of_samples_in_the_dataset)))
         assert_that(os.path.exists(zip_file), is_(equal_to(True)))
 
         # Cleanup
