@@ -22,6 +22,10 @@ class DeepScoreXmlToCsvConverter(object):
             left = annotation_object.findtext("bndbox/xmin")
             bottom = annotation_object.findtext("bndbox/ymax")
             right = annotation_object.findtext("bndbox/xmax")
+
+            if class_name == "staffLine":
+                continue # Skip staffLines from the deep scores dataset
+
             data.append((filename, top, left, bottom, right, class_name))
 
         converted_output = pd.DataFrame(data=data,
