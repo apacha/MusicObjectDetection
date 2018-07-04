@@ -28,7 +28,7 @@ class MensuralConverter(object):
             with open(annotation_path, 'r') as gt_file:
                 lines = gt_file.read().splitlines()
 
-            filename = "images/{0}.png".format(os.path.basename(annotation_path[-8]))
+            filename = "images/{0}.png".format(os.path.basename(annotation_path)[:-8])
             for line in lines:
                 upper_left, lower_right, ground_truth = line.split(';')
                 class_name, staff_line_position = ground_truth.split(':')
