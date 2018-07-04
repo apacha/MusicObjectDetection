@@ -30,7 +30,8 @@ class MensuralConverter(object):
 
             filename = "images/{0}.png".format(os.path.basename(annotation_path[-8]))
             for line in lines:
-                upper_left, lower_right, class_name, gt_position = line.split(';')
+                upper_left, lower_right, ground_truth = line.split(';')
+                class_name, staff_line_position = ground_truth.split(':')
                 xmin, ymin = upper_left.split(',')
                 xmax, ymax = lower_right.split(',')
 
