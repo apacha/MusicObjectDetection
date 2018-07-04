@@ -11,10 +11,10 @@ class DeepScoresDatasetDownloader(DatasetDownloader):
 
     def get_dataset_download_url(self) -> str:
         # Is neither the full deep scores, nor the condensed version, but simply a partial dataset
-        return "https://owncloud.tuwien.ac.at/index.php/s/CXbjDpfCDdx9cTY/download"
+        return "https://owncloud.tuwien.ac.at/index.php/s/OfYFuXlQ5CH0zf6/download"
 
     def get_dataset_filename(self) -> str:
-        return "deep-scores-dense-mob.zip"
+        return "deep-scores-v2_100p.zip"
 
     def download_and_extract_dataset(self, destination_directory: str):
         if not os.path.exists(self.get_dataset_filename()):

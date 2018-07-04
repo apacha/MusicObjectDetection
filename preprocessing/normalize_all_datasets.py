@@ -16,7 +16,7 @@ if __name__ == "__main__":
     flags, unparsed = parser.parse_known_args()
 
     deep_score_converter = DeepScoreXmlToCsvConverter()
-    deep_score_directory = os.path.join(flags.dataset_directory, "deepscores", "deep_scores_dense")
+    deep_score_directory = os.path.join(flags.dataset_directory, "deepscores", "deep_scores_v2_100p")
     normalized_deep_score_directory = os.path.join(flags.dataset_directory, "normalized", "deepscores")
     deep_score_converter.copy_and_normalize_images(deep_score_directory, normalized_deep_score_directory)
     deep_score_converter.normalize_annotations(deep_score_directory, normalized_deep_score_directory)
