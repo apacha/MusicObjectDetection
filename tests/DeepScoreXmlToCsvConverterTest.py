@@ -76,9 +76,9 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
         converter = DeepScoreXmlToCsvConverter()
 
         # Act
-        converter.copy_and_normalize_images(os.path.join(dataset_directory, "deep_scores_dense"),
+        converter.copy_and_normalize_images(os.path.join(dataset_directory, "deep_scores_v2_100p"),
                                             normalized_dataset_directory)
-        converter.normalize_annotations(os.path.join(dataset_directory, "deep_scores_dense"),
+        converter.normalize_annotations(os.path.join(dataset_directory, "deep_scores_v2_100p"),
                                         normalized_dataset_directory)
 
         # Assert
@@ -87,7 +87,7 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
 
         # Cleanup
         shutil.rmtree("temp", True)
-        os.remove("deep-scores-dense-mob.zip")
+        os.remove("deep-scores-v2_100p.zip")
 
 
 if __name__ == '__main__':

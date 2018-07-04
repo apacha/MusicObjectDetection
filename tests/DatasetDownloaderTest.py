@@ -17,7 +17,7 @@ class DatasetDownloaderTest(unittest.TestCase):
         destination_directory = "mensural"
         downloader = MensuralDatasetDownloader()
         zip_file = downloader.get_dataset_filename()
-        number_of_samples_in_the_dataset = 120
+        number_of_samples_in_the_dataset = 92
         target_file_extension = ["*.JPG", "*.txt"]
 
         self.download_dataset_and_verify_correct_extraction(destination_directory, number_of_samples_in_the_dataset,
@@ -29,7 +29,7 @@ class DatasetDownloaderTest(unittest.TestCase):
         destination_directory = "deepscores"
         downloader = DeepScoresDatasetDownloader()
         zip_file = downloader.get_dataset_filename()
-        number_of_samples_in_the_dataset = 3728
+        number_of_samples_in_the_dataset = 300
         target_file_extension = ["*.png", "*.xml"]
 
         self.download_dataset_and_verify_correct_extraction(destination_directory, number_of_samples_in_the_dataset,
