@@ -65,7 +65,7 @@ class DeepScoreXmlToCsvConverter(object):
                 absolute_annotations = self._convert_relative_to_absolute_coordinates(annotations, image_width,
                                                                                       image_height)
                 absolute_annotations['path_to_image'] = absolute_annotations['path_to_image'].apply(
-                    lambda x: "images/" + x)
+                    lambda x: "images/" + x[:-3] + "png")
                 if all_annotations is None:
                     all_annotations = absolute_annotations
                 else:
