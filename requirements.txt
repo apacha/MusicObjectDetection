@@ -11,3 +11,4 @@ PyHamcrest
 numpy
 tqdm
 pandas
+muscima
