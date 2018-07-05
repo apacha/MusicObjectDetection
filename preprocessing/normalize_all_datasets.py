@@ -28,6 +28,7 @@ if __name__ == "__main__":
                                                    normalized_muscima_pp_directory)
     muscima_pp_converter.normalize_annotations(os.path.join(flags.dataset_directory, "muscima_pp"),
                                                normalized_muscima_pp_directory)
+    muscima_pp_converter.remove_unused_images(normalized_muscima_pp_directory)
 
     mensural_converter = MensuralConverter()
     normalized_mensural_directory = os.path.join(flags.dataset_directory, "normalized", "mensural")
