@@ -5,7 +5,7 @@ setup(
     name='MusicObjectDetection',
     version='0.1',
     packages=['tests', 'datasets', 'evaluation', 'preprocessing'],
-    url='',
+    url='https://bitbucket.org/apacha/musicobjectdetection',
     license='',
     author='Alexander Pacha, Jorge Calvo-Zaragoza, Jan Hajič jr.',
     author_email='alexander.pacha@tuwien.at, jcalvo@upv.es, hajicj@ufal.mff.cuni.cz',
