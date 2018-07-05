@@ -2,6 +2,11 @@
 
 This is the accompanying repository for the Music Object Detection paper and contains the source code for downloading, preprocessing and working with the data, as well as the evaluation code to measure the performance of various music object detectors.
 
+## Installing requirements
+
+- Install the requirements by running `pip install -r requirements.txt`
+    - If you are running on Windows you might have to install the first two packages using `conda install ...` instead of `pip install ...`. 
+
 ## Downloading the datasets
 
 In this repository we link to [relevant datasets](https://apacha.github.io/OMR-Datasets/), that are used for Music Object Detection:

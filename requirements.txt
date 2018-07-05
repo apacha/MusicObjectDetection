@@ -4,10 +4,11 @@ pytest >= 3.0.7
 
 # Install via "pip install ..."
 lxml
-omrdatasettools >= 0.10
+omrdatasettools >= 0.11
 codecov
 pytest-cov
 PyHamcrest
 numpy
 tqdm
 pandas
+muscima
