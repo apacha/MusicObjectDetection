@@ -24,7 +24,7 @@ class DeepScoreXmlToCsvConverter(object):
             right = annotation_object.findtext("bndbox/xmax")
 
             if class_name == "staffLine":
-                continue # Skip staffLines from the deep scores dataset
+                continue  # Skip staffLines from the deep scores dataset
 
             data.append((filename, top, left, bottom, right, class_name))
 
@@ -42,6 +42,14 @@ class DeepScoreXmlToCsvConverter(object):
         normalized_annotations['right'] *= image_width
         normalized_annotations['top'] *= image_height
         normalized_annotations['bottom'] *= image_height
+
+        # Correct for 0-pixel width / height annotations (caused by rounding issues) by making extending the box by two pixels
+        zero_width_rows = normalized_annotations['right'].astype(int) - normalized_annotations['left'].astype(int) < 1
+        zero_height_rows = normalized_annotations['bottom'].astype(int) - normalized_annotations['top'].astype(int) < 1
+        normalized_annotations['left'] = normalized_annotations['left'] - zero_width_rows.astype(int)
+        normalized_annotations['right'] = normalized_annotations['right'] + zero_width_rows.astype(int)
+        normalized_annotations['top'] = normalized_annotations['top'] - zero_height_rows.astype(int)
+        normalized_annotations['bottom'] = normalized_annotations['bottom'] + zero_height_rows.astype(int)
 
         return normalized_annotations
 

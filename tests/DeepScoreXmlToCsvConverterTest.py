@@ -67,6 +67,28 @@ class DeepScoreXmlToCsvConverterTest(unittest.TestCase):
 
         assert_frame_equal(actual_output, expected_output)
 
+    def test_convert_relative_to_absolute_coordinates_zero_width_annotations_expect_offset(self):
+        data_input = pd.DataFrame(data=[("page-2.svg", "0.03", "0.02", "0.03", "0.02", "noteheadBlack")],
+                                  columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
+        expected_output = pd.DataFrame(data=[("page-2.svg", 2.0, 3.0, 4.0, 5.0, "noteheadBlack")],
+                                       columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
+
+        converter = DeepScoreXmlToCsvConverter()
+        actual_output = converter._convert_relative_to_absolute_coordinates(data_input, 200, 100)
+
+        assert_frame_equal(actual_output, expected_output)
+
+    def test_convert_relative_to_absolute_coordinates_zero_width_annotations_expect_offset_2(self):
+        data_input = pd.DataFrame(data=[("page-2.svg", "0.022", "0.021", "0.029", "0.039", "noteheadBlack")],
+                                  columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
+        expected_output = pd.DataFrame(data=[("page-2.svg", 1.2, 2.1, 3.9, 3.9, "noteheadBlack")],
+                                       columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
+
+        converter = DeepScoreXmlToCsvConverter()
+        actual_output = converter._convert_relative_to_absolute_coordinates(data_input, 100, 100)
+
+        assert_frame_equal(actual_output, expected_output)
+
     def test_deep_scores_normalization_expect_annotations_in_directory(self):
         # Arrange
         dataset_directory = "temp"
