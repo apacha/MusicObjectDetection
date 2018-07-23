@@ -6,8 +6,8 @@ import pandas as pd
 from hamcrest import assert_that, is_, empty, not_, equal_to
 from pandas.util.testing import assert_frame_equal
 
-from datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
-from preprocessing.DeepScoreXmlToCsvConverter import DeepScoreXmlToCsvConverter
+from MusicObjectDetection.datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
+from MusicObjectDetection.preprocessing.DeepScoreXmlToCsvConverter import DeepScoreXmlToCsvConverter
 
 
 class DeepScoreXmlToCsvConverterTest(unittest.TestCase):

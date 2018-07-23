@@ -7,8 +7,8 @@ from typing import List
 from hamcrest import assert_that, is_, equal_to
 from omrdatasettools.downloaders import DatasetDownloader
 
-from datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
-from datasets.MensuralDatasetDownloader import MensuralDatasetDownloader
+from MusicObjectDetection.datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
+from MusicObjectDetection.datasets.MensuralDatasetDownloader import MensuralDatasetDownloader
 
 
 class DatasetDownloaderTest(unittest.TestCase):

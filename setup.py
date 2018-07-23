@@ -5,7 +5,6 @@ setup(
     name='MusicObjectDetection',
     version='0.1',
     packages=['MusicObjectDetection',
-              'MusicObjectDetection.tests',
               'MusicObjectDetection.datasets',
               'MusicObjectDetection.evaluation',
               'MusicObjectDetection.preprocessing'],
