@@ -4,6 +4,7 @@ import os
 from preprocessing.DeepScoreXmlToCsvConverter import DeepScoreXmlToCsvConverter
 from preprocessing.MensuralConverter import MensuralConverter
 from preprocessing.MuscimaPpXmlToCsvConverter import MuscimaPpXmlToCsvConverter
+from preprocessing.dataset_splitter import DatasetSplitter
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -27,9 +28,15 @@ if __name__ == "__main__":
                                                    normalized_muscima_pp_directory)
     muscima_pp_converter.normalize_annotations(os.path.join(flags.dataset_directory, "muscima_pp"),
                                                normalized_muscima_pp_directory)
+    muscima_pp_converter.remove_unused_images(normalized_muscima_pp_directory)
 
     mensural_converter = MensuralConverter()
     normalized_mensural_directory = os.path.join(flags.dataset_directory, "normalized", "mensural")
     mensural_directory = os.path.join(flags.dataset_directory, "mensural")
     mensural_converter.copy_and_normalize_images(mensural_directory, normalized_mensural_directory)
     mensural_converter.normalize_annotations(mensural_directory, normalized_mensural_directory)
+
+    dataset_splitter = DatasetSplitter()
+    dataset_splitter.split_annotations_into_training_validation_and_test_set(normalized_deep_score_directory)
+    dataset_splitter.split_annotations_into_training_validation_and_test_set(normalized_muscima_pp_directory)
+    dataset_splitter.split_annotations_into_training_validation_and_test_set(normalized_mensural_directory)

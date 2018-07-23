@@ -48,3 +48,13 @@ class MuscimaPpXmlToCsvConverter(object):
         all_annotations = pd.DataFrame(data=data,
                                        columns=["path_to_image", "top", "left", "bottom", "right", "class_name"])
         all_annotations.to_csv(destination_annotation_file, index=False, float_format="%.0f")
+
+    def remove_unused_images(self, output_directory: str) -> None:
+
+        annotation_file = os.path.join(output_directory, "annotations.csv")
+        all_annotations = pd.read_csv(annotation_file)
+        used_files = [os.path.basename(path) for path in all_annotations['path_to_image'].unique()]
+
+        for file_path in tqdm(glob(output_directory + "/images/*.png"), desc="Removing unused images"):
+            if os.path.basename(file_path) not in used_files:
+                os.remove(file_path)

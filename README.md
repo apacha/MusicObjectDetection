@@ -6,6 +6,7 @@ This is the accompanying repository for the Music Object Detection paper and con
 
 - Install the requirements by running `pip install -r requirements.txt`
     - If you are running on Windows you might have to install the first two packages using `conda install ...` instead of `pip install ...`. 
+- Link this project via pip to avoid import errors by running: `pip install -e .`
 
 ## Downloading the datasets
 
