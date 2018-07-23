@@ -2,9 +2,13 @@ from __future__ import print_function, unicode_literals
 from distutils.core import setup
 
 setup(
-    name='MusicObjectDetection',
+    name='musicobjectdetection',
     version='0.1',
-    packages=['tests', 'datasets', 'evaluation', 'preprocessing'],
+    packages=['musicobjectdetection',
+              'musicobjectdetection.tests',
+              'musicobjectdetection.datasets',
+              'musicobjectdetection.evaluation',
+              'musicobjectdetection.preprocessing'],
     url='',
     license='',
     author='Alexander Pacha, Jorge Calvo-Zaragoza, Jan Hajič jr.',

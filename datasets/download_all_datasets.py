@@ -4,8 +4,8 @@ import os
 from omrdatasettools.downloaders.CvcMuscimaDatasetDownloader import CvcMuscimaDatasetDownloader, CvcMuscimaDataset
 from omrdatasettools.downloaders.MuscimaPlusPlusDatasetDownloader import MuscimaPlusPlusDatasetDownloader
 
-from music_object_detection.datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
-from music_object_detection.datasets.MensuralDatasetDownloader import MensuralDatasetDownloader
+from musicobjectdetection.datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
+from musicobjectdetection.datasets.MensuralDatasetDownloader import MensuralDatasetDownloader
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
