@@ -1,10 +1,10 @@
 import argparse
 import os
 
-from preprocessing.DeepScoreXmlToCsvConverter import DeepScoreXmlToCsvConverter
-from preprocessing.MensuralConverter import MensuralConverter
-from preprocessing.MuscimaPpXmlToCsvConverter import MuscimaPpXmlToCsvConverter
-from preprocessing.dataset_splitter import DatasetSplitter
+from MusicObjectDetection.preprocessing.DeepScoreXmlToCsvConverter import DeepScoreXmlToCsvConverter
+from MusicObjectDetection.preprocessing.MensuralConverter import MensuralConverter
+from MusicObjectDetection.preprocessing.MuscimaPpXmlToCsvConverter import MuscimaPpXmlToCsvConverter
+from MusicObjectDetection.preprocessing.dataset_splitter import DatasetSplitter
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
