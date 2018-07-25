@@ -18,10 +18,11 @@ class DatasetSplitter:
 
         annotations = pd.read_csv(os.path.join(dataset_directory, "annotations.csv"))
         all_file_paths = annotations['path_to_image'].unique()
+        all_file_paths.sort()
         dataset_size = all_file_paths.shape[0]
 
         random.seed(seed)
-        all_indices = range(0, dataset_size)
+        all_indices = list(range(0, dataset_size))
         validation_sample_size = int(dataset_size * validation_fraction)
         test_sample_size = int(dataset_size * test_fraction)
         validation_sample_indices = random.sample(all_indices, validation_sample_size)
