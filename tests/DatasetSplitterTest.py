@@ -5,8 +5,8 @@ import unittest
 import pandas as pd
 from hamcrest import assert_that, is_, equal_to
 
-from datasets.download_all_datasets import download_all_datasets
-from preprocessing.normalize_all_datasets import normalize_all_datasets
+from MusicObjectDetection.datasets.download_all_datasets import download_all_datasets
+from MusicObjectDetection.preprocessing.normalize_all_datasets import normalize_all_datasets
 
 deepscores_training_images = {'images/lg-100032803-aug-beethoven-.png',
                               'images/lg-100032803-aug-emmentaler-.png',
