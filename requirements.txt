@@ -11,4 +11,5 @@ PyHamcrest
 numpy
 tqdm
 pandas
-muscima
+muscima==0.10
+scikit-image
