@@ -7,6 +7,7 @@ import os
 # https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html
 #
 
+
 def compute_ap(recall, precision):
     """ Compute the average precision, given the recall and precision curves.
     Code originally from https://github.com/rbgirshick/py-faster-rcnn.
@@ -129,7 +130,7 @@ def get_ap(images, categories, pred_boxes, ann_boxes, iou_threshold):
             
             # Sort according to score
             category_image_predictions = [box for box in pred_boxes if box['image'] == image and box['category'] == category]            
-            #print(category_image_predictions)                          
+            # print(category_image_predictions)
             category_image_predictions = sorted(category_image_predictions, key=lambda k: -k['score'])
             
             #                 
@@ -157,7 +158,6 @@ def get_ap(images, categories, pred_boxes, ann_boxes, iou_threshold):
                     false_positives = np.append(false_positives,1)
                     true_positives = np.append(true_positives, 0)
                 
-        
         if num_annotations == 0:
             average_precisions[category] = [0, 0]
             continue
@@ -203,9 +203,12 @@ def get_metrics(average_precisions):
 ############################################################
 
 parser = argparse.ArgumentParser(description='Evaluate music object detection from CSV files.')
-parser.add_argument('-annotation',  dest='annotation', type=str, required=True, help='Path to the annotation CSV file.')
-parser.add_argument('-prediction',  dest='prediction', type=str, required=True, help='Path to the prediction CSV file.')
-parser.add_argument('-classes', dest='classes', action='store_true', help='Whether to retrieve class-wise results as well.')
+parser.add_argument('-annotation',  dest='annotation', type=str, required=True,
+                    help='Path to the annotation CSV file.')
+parser.add_argument('-prediction',  dest='prediction', type=str, required=True,
+                    help='Path to the prediction CSV file.')
+parser.add_argument('-classes', dest='classes', action='store_true',
+                    help='Whether to compute class-wise results as well.')
 args = parser.parse_args()
 
 
@@ -228,12 +231,12 @@ for th in thresholds:
 
 mAP, weightedmAP = get_metrics(ap_by_th[0.5])
 print('Pascal, IoU = 0.5')
-print('\t','mAP',mAP,'\t','w-mAP',weightedmAP)
+print('\t', 'mAP', mAP, '\t', 'w-mAP', weightedmAP)
 
 if args.classes:
-        print()
-        for cls in ap_by_th[0.5]:
-            print('\t\t',str(cls),'\t',ap_by_th[0.5][cls][0])
+    print()
+    for cls in sorted(ap_by_th[0.5].keys()):
+        print('\t\t', str(cls), '\t', ap_by_th[0.5][cls][0])
 
 
 #############
@@ -241,7 +244,7 @@ if args.classes:
 print()
 print()
 
-global_ap= {}
+global_ap = {}
 
 
 for category in ap_by_th[th]:
