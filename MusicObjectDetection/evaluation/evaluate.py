@@ -258,10 +258,9 @@ for category in ap_by_th[th]:
 
 mAP, weightedmAP = get_metrics(global_ap)
 print('COCO, IoU = [0.5:0.95:0.05]')
-print('\t','mAP',mAP,'\t','w-mAP',weightedmAP)
+print('\t', 'mAP', mAP, '\t', 'w-mAP', weightedmAP)
 
 if args.classes:
         print()
-        for cls in global_ap:
-            print('\t\t',str(cls),'\t',global_ap[cls][0])
-    
+        for cls in sorted(global_ap.keys()):
+            print('\t\t', str(cls), '\t', global_ap[cls][0])
