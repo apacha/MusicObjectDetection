@@ -33,6 +33,7 @@ def compute_ap(recall, precision):
     ap = np.sum((mrec[i + 1] - mrec[i]) * mpre[i + 1])
     return ap
 
+
 def get_data(csv_filepath):
     boxes = []
         
@@ -43,7 +44,10 @@ def get_data(csv_filepath):
     categories = set()
     image_hashes = set()
     
-    for idx,annotation in enumerate(annotation_list):
+    for idx, annotation in enumerate(annotation_list):
+        # Skip header row, if it was produced
+        if annotation.startswith('path_to_image'):
+            continue
         entry_elements = annotation.split(',')
         
         if len(entry_elements) == 7:
@@ -72,10 +76,8 @@ def get_data(csv_filepath):
         boxes.append(box)
         categories.add(category)
         image_hashes.add(image_hash)
-        
-        
-    return boxes, categories, image_hashes
 
+    return boxes, categories, image_hashes
 
 
 def compute_overlap(boxes, query_boxes):
@@ -184,8 +186,7 @@ def get_metrics(average_precisions):
     meanAP = 0
     count = 0
     weightedmAP = 0
-    weightedCount =0
-    
+    weightedCount = 0
     
     for category in average_precisions:
         meanAP += average_precisions[category][0]
@@ -209,7 +210,7 @@ args = parser.parse_args()
 
 
 ann_boxes, ann_categories , ann_images = get_data(args.annotation)
-pred_boxes, pred_categories, pred_images  = get_data(args.prediction)
+pred_boxes, pred_categories, pred_images = get_data(args.prediction)
 
 images = ann_images | pred_images
 categories = ann_categories | pred_categories
