@@ -23,8 +23,8 @@ class DeepScoreXmlToCsvConverter(object):
             bottom = annotation_object.findtext("bndbox/ymax")
             right = annotation_object.findtext("bndbox/xmax")
 
-            if class_name == "staffLine":
-                continue  # Skip staffLines from the deep scores dataset
+            if class_name == "staffLine" or class_name == "staffComb":
+                continue  # Skip staffLines or staves ('staffComb(ined)') from the deep scores dataset
 
             data.append((filename, top, left, bottom, right, class_name))
 
