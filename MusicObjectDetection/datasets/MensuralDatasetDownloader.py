@@ -10,7 +10,7 @@ class MensuralDatasetDownloader(DatasetDownloader):
     """
 
     def get_dataset_download_url(self) -> str:
-        return "https://owncloud.tuwien.ac.at/index.php/s/hMc6WY64rYO9jcX/download"
+        return ""  # Insert actual download link here
 
     def get_dataset_filename(self) -> str:
         return "mensural-detector-database.zip"
@@ -18,6 +18,12 @@ class MensuralDatasetDownloader(DatasetDownloader):
     def download_and_extract_dataset(self, destination_directory: str):
         if not os.path.exists(self.get_dataset_filename()):
             print("Downloading Mensural Dataset...")
+
+            if self.get_dataset_download_url() is "":
+                print("Can't download the Capitan dataset, because no download URL has been specified. Please contact "
+                      "the authors, if you want to have access to the dataset, before it is publicly released.")
+                return
+
             self.download_file(self.get_dataset_download_url(), self.get_dataset_filename())
 
         print("Extracting Mensural Dataset...")

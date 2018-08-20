@@ -4,6 +4,7 @@ import unittest
 from glob import glob
 from typing import List
 
+import pytest
 from hamcrest import assert_that, is_, equal_to
 from omrdatasettools.downloaders import DatasetDownloader
 
@@ -12,6 +13,7 @@ from MusicObjectDetection.datasets.MensuralDatasetDownloader import MensuralData
 
 
 class DatasetDownloaderTest(unittest.TestCase):
+    @pytest.mark.skip(reason="Disabled, due to the current unavailability of the Capitan dataset for the general public")
     def test_download_and_extract_mensural_dataset_expect_folder_to_be_created(self):
         # Arrange
         destination_directory = "mensural"
