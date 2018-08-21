@@ -3,6 +3,7 @@ import shutil
 import unittest
 
 import pandas as pd
+import pytest
 from hamcrest import assert_that, is_, equal_to
 
 from MusicObjectDetection.datasets.download_all_datasets import download_all_datasets
@@ -315,20 +316,30 @@ def compare_dataset_splits(path_to_dataset, training_set, validation_set,
 
 
 class DatasetSplitterTest(unittest.TestCase):
-    def test_download_and_normalize_datasets_assert_correct_test_splits(self):
+    def test_download_and_normalize_datasets_assert_correct_test_splits_muscima_and_deepscores(self):
         download_all_datasets("temp")
         normalize_all_datasets("temp")
 
-        path_to_deepscores = "temp/normalized/deepscores"
-        path_to_mensural = "temp/normalized/mensural"
         path_to_muscima = "temp/normalized/muscima"
+        path_to_deepscores = "temp/normalized/deepscores"
 
-        compare_dataset_splits(path_to_deepscores, deepscores_training_images, deepscores_validation_images,
-                               deepscores_test_images)
-        compare_dataset_splits(path_to_mensural, mensural_training_images, mensural_validation_images,
-                               mensural_test_images)
         compare_dataset_splits(path_to_muscima, muscima_training_images, muscima_validation_images,
                                muscima_test_images)
+        compare_dataset_splits(path_to_deepscores, deepscores_training_images, deepscores_validation_images,
+                               deepscores_test_images)
+
+        shutil.rmtree("temp", ignore_errors=True)
+
+    @pytest.mark.skip(
+        reason="Disabled, due to the current unavailability of the Capitan dataset for the general public")
+    def test_download_and_normalize_datasets_assert_correct_test_splits_mensural(self):
+        download_all_datasets("temp")
+        normalize_all_datasets("temp")
+
+        path_to_mensural = "temp/normalized/mensural"
+
+        compare_dataset_splits(path_to_mensural, mensural_training_images, mensural_validation_images,
+                               mensural_test_images)
 
         shutil.rmtree("temp", ignore_errors=True)
 
