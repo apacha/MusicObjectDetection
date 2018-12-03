@@ -1,6 +1,24 @@
 # Music Object Detection Collection
 
-This is the accompanying repository for the Music Object Detection paper and contains the source code for downloading, preprocessing and working with the data, as well as the evaluation code to measure the performance of various music object detectors.
+This is the accompanying repository for the scientific paper ["A Baseline for General Music Object Detection with Deep Learning"](https://www.mdpi.com/2076-3417/8/9/1488) and contains the source code for downloading, preprocessing and working with the data, as well as the evaluation code to measure the performance of various music object detectors.
+
+If you use code from this repository, please consider citing this work as 
+
+```
+@Article{Pacha2018,
+  author         = {Pacha, Alexander and Hajič, Jan and Calvo-Zaragoza, Jorge},
+  title          = {A Baseline for General Music Object Detection with Deep Learning},
+  journal        = {Applied Sciences},
+  year           = {2018},
+  volume         = {8},
+  number         = {9},
+  issn           = {2076-3417},
+  abstract       = {Deep learning is bringing breakthroughs to many computer vision subfields including Optical Music Recognition (OMR), which has seen a series of improvements to musical symbol detection achieved by using generic deep learning models. However, so far, each such proposal has been based on a specific dataset and different evaluation criteria, which made it difficult to quantify the new deep learning-based state-of-the-art and assess the relative merits of these detection models on music scores. In this paper, a baseline for general detection of musical symbols with deep learning is presented. We consider three datasets of heterogeneous typology but with the same annotation format, three neural models of different nature, and establish their performance in terms of a common evaluation standard. The experimental results confirm that the direct music object detection with deep learning is indeed promising, but at the same time illustrates some of the domain-specific shortcomings of the general detectors. A qualitative comparison then suggests avenues for OMR improvement, based both on properties of the detection model and how the datasets are defined. To the best of our knowledge, this is the first time that competing music object detection systems from the machine learning paradigm are directly compared to each other. We hope that this work will serve as a reference to measure the progress of future developments of OMR in music object detection.},
+  article-number = {1488},
+  doi            = {10.3390/app8091488},
+  url            = {http://www.mdpi.com/2076-3417/8/9/1488},
+}
+```
 
 ## Installing requirements
 
