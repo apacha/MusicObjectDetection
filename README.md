@@ -78,12 +78,16 @@ We opted for this simple format, because it can easily be read by humans and by 
 ## Evaluation
 
 For making fair comparisons of different object detectors, a standard battery of metrics is used, that operates on normalized CSV files.
+The executable script can be found in the [evaluation](MusicObjectDetection/evaluation/evaluate.py) directory.
+
+## Update June 2020
+Upgraded to use the latest version of the OMR dataset tools and to work again as expected.
 
 # License
 
 Published under MIT License,
 
-Copyright (c) 2018 [Alexander Pacha](http://alexanderpacha.com), [Jan Hajič](https://ufal.mff.cuni.cz/jan-hajic-jr) and [Jorge Calvo-Zaragoza](https://grfia.dlsi.ua.es/members.php?id=55)
+Copyright (c) 2020 [Alexander Pacha](http://alexanderpacha.com), [Jan Hajič](https://ufal.mff.cuni.cz/jan-hajic-jr) and [Jorge Calvo-Zaragoza](https://grfia.dlsi.ua.es/members.php?id=55)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

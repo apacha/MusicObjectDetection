@@ -9,14 +9,14 @@ from MusicObjectDetection.preprocessing.dataset_splitter import DatasetSplitter
 
 def normalize_all_datasets(dataset_directory: str) -> None:
     deep_score_converter = DeepScoreXmlToCsvConverter()
-    deep_score_directory = os.path.join(dataset_directory, "deepscores", "deep_scores_v2_100p")
+    deep_score_directory = os.path.join(dataset_directory, "deepscores", "deep_scores_dense_extended")
     normalized_deep_score_directory = os.path.join(dataset_directory, "normalized", "deepscores")
     deep_score_converter.copy_and_normalize_images(deep_score_directory, normalized_deep_score_directory)
     deep_score_converter.normalize_annotations(deep_score_directory, normalized_deep_score_directory)
 
     muscima_pp_converter = MuscimaPpXmlToCsvConverter()
     normalized_muscima_pp_directory = os.path.join(dataset_directory, "normalized", "muscima")
-    muscima_pp_converter.copy_and_normalize_images(os.path.join(dataset_directory, "cvc_muscima"),
+    muscima_pp_converter.copy_and_normalize_images(os.path.join(dataset_directory, "muscima_pp"),
                                                    normalized_muscima_pp_directory)
     muscima_pp_converter.normalize_annotations(os.path.join(dataset_directory, "muscima_pp"),
                                                normalized_muscima_pp_directory)

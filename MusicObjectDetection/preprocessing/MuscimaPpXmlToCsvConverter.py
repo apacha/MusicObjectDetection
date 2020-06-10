@@ -2,11 +2,14 @@ import os
 import re
 import shutil
 from glob import glob
+from typing import List
 
-from omrdatasettools.converters.ImageInverter import ImageInverter
-from omrdatasettools.image_generators.MuscimaPlusPlusImageGenerator import MuscimaPlusPlusImageGenerator
-from tqdm import tqdm
 import pandas as pd
+from muscima.cropobject import CropObject
+from muscima.io import parse_cropobject_list
+from tqdm import tqdm
+
+from MusicObjectDetection.preprocessing.image_color_inverter import ImageColorInverter
 
 
 class MuscimaPpXmlToCsvConverter(object):
@@ -14,30 +17,31 @@ class MuscimaPpXmlToCsvConverter(object):
     def copy_and_normalize_images(self, cvc_muscima_directory: str, output_directory: str) -> None:
         os.makedirs(os.path.join(output_directory, "images"), exist_ok=True)
 
-        all_images = glob(cvc_muscima_directory + "/**/ideal/**/image/*.png", recursive=True)
+        all_images = glob(cvc_muscima_directory + "/**/*.png", recursive=True)
 
         for image_path in tqdm(all_images, desc="Copying images"):
-            writer = re.search("w-..", image_path).group()
-            file_name = os.path.basename(image_path)
-            output_path = os.path.join(output_directory, "images", writer + "_" + file_name)
+            output_path = os.path.join(output_directory, "images", os.path.basename(image_path))
             shutil.copy(image_path, output_path)
 
-        image_inverter = ImageInverter()
+        image_inverter = ImageColorInverter()
         image_inverter.invert_images(output_directory, "*.png")
 
     def normalize_annotations(self, muscima_pp_directory: str, output_directory: str) -> None:
 
         destination_annotation_file = os.path.join(output_directory, "annotations.csv")
 
-        muscima_pp_image_generator = MuscimaPlusPlusImageGenerator()
-        xml_file_paths = muscima_pp_image_generator.get_all_xml_file_paths(muscima_pp_directory)
-        all_crop_objects = muscima_pp_image_generator.load_crop_objects_from_xml_files(xml_file_paths)
+        raw_data_directory = os.path.join(muscima_pp_directory, "v1.0", "data", "cropobjects_withstaff")
+        xml_file_paths = [y for x in os.walk(raw_data_directory) for y in glob(os.path.join(x[0], '*.xml'))]
+        all_crop_objects = []  # type: List[CropObject]
+        for xml_file_path in tqdm(xml_file_paths, desc="Loading annotations from MUSCIMA++ dataset"):
+            all_crop_objects.extend(parse_cropobject_list(xml_file_path))
+            break
 
         data = []
         for crop_object in tqdm(all_crop_objects, "Converting annotations"):
-            writer = re.search("W-..", crop_object.doc).group().lower()
+            writer = re.search("W-..", crop_object.doc).group()
             page = int(re.search("N-..", crop_object.doc).group()[2:])
-            filename = "images/{0}_p{1:03d}.png".format(writer, page)
+            filename = "images/CVC-MUSCIMA_{0}_{1}_D-ideal.png".format(writer, page)
             class_name = crop_object.clsname
             top = crop_object.top
             left = crop_object.left

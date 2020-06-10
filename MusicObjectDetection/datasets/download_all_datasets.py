@@ -1,29 +1,29 @@
 import argparse
 import os
 
-from omrdatasettools.downloaders.CvcMuscimaDatasetDownloader import CvcMuscimaDatasetDownloader, CvcMuscimaDataset
-from omrdatasettools.downloaders.MuscimaPlusPlusDatasetDownloader import MuscimaPlusPlusDatasetDownloader
-
-from MusicObjectDetection.datasets.DeepScoresDatasetDownloader import DeepScoresDatasetDownloader
-from MusicObjectDetection.datasets.MensuralDatasetDownloader import MensuralDatasetDownloader
+from omrdatasettools import *
 
 
 def download_all_datasets(dataset_directory):
     muscima_pp_directory = os.path.join(dataset_directory, "muscima_pp")
-    downloader = MuscimaPlusPlusDatasetDownloader()
-    downloader.download_and_extract_dataset(muscima_pp_directory)
-
-    cvc_muscima_directory = os.path.join(dataset_directory, "cvc_muscima")
-    downloader = CvcMuscimaDatasetDownloader(CvcMuscimaDataset.StaffRemoval)
-    downloader.download_and_extract_dataset(cvc_muscima_directory)
+    downloader = Downloader()
+    downloader.download_and_extract_dataset(OmrDataset.MuscimaPlusPlus_V1, muscima_pp_directory)
 
     mensural_directory = os.path.join(dataset_directory, "mensural")
-    downloader = MensuralDatasetDownloader()
-    downloader.download_and_extract_dataset(mensural_directory)
+    mensural_name = "mensural"
+    mensural_url = ""
+    mensural_filename = "mensural-detector-database.zip"
+
+    if mensural_url is "":
+        print("Can't download the Capitan dataset, because no download URL has been specified. Please contact "
+              "the authors, if you want to have access to the dataset, before it is publicly released."
+              "Developer Info: https://bitbucket.org/apacha/mensural-detector-database/")
+    else:
+        downloader.download_and_extract_custom_dataset(mensural_name, mensural_url, mensural_filename,
+                                                       mensural_directory)
 
     deepscores_directory = os.path.join(dataset_directory, "deepscores")
-    downloader = DeepScoresDatasetDownloader()
-    downloader.download_and_extract_dataset(deepscores_directory)
+    downloader.download_and_extract_dataset(OmrDataset.DeepScores_V1_Extended, deepscores_directory)
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ class MensuralConverter(object):
     def copy_and_normalize_images(self, mensural_directory: str, output_directory: str) -> None:
         os.makedirs(os.path.join(output_directory, "images"), exist_ok=True)
 
-        all_images = glob(mensural_directory + "/*.JPG")
+        all_images = glob(mensural_directory + "/**/*.JPG", recursive=True)
 
         for image_path in tqdm(all_images, desc="Copying and converting images"):
             image = Image.open(image_path)
@@ -21,7 +21,7 @@ class MensuralConverter(object):
 
     def normalize_annotations(self, mensural_directory: str, output_directory: str) -> None:
         destination_annotation_file = os.path.join(output_directory, "annotations.csv")
-        all_annotations = glob(mensural_directory + "/*.txt")
+        all_annotations = glob(mensural_directory + "/**/*.txt", recursive=True)
 
         data = []
         for annotation_path in tqdm(all_annotations, desc="Normalizing annotations"):
