@@ -8,7 +8,7 @@ omrdatasettools==1.3.0
 codecov==2.1.3
 pytest-cov==2.8.1
 PyHamcrest==2.0.2
-numpy==1.18.4
+numpy==1.21.0
 tqdm==4.45.0
 pandas==1.0.3
 muscima==0.10.0
