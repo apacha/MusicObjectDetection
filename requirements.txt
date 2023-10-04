@@ -1,5 +1,5 @@
 # Use conda install ... to install these
-Pillow==9.3.0
+Pillow==10.0.1
 pytest==5.4.1
 
 # Install via "pip install ..."
