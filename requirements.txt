@@ -1,6 +1,6 @@
 # Use conda install ... to install these
 Pillow==12.2.0
-pytest==5.4.1
+pytest==9.0.3
 
 # Install via "pip install ..."
 lxml==6.1.0
